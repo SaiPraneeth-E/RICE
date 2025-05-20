@@ -9,13 +9,13 @@ export default function HeroSection() {
       <div className="container mx-auto px-4 md:px-6 text-center">
         <div className="absolute inset-0 opacity-10">
             <Image
-              src="https://placehold.co/1920x1080.png"
+              src="https://images.pexels.com/photos/974314/pexels-photo-974314.jpeg"
               alt="Rural landscape with technology integration"
               layout="fill"
               objectFit="cover"
               quality={80}
               priority
-              data-ai-hint="farmer app warehouse"
+              data-ai-hint="farmer field"
             />
         </div>
         <div className="relative z-10">
