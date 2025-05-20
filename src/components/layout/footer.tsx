@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { RiceLogo } from '@/components/icons/rice-logo';
+import Image from 'next/image';
 import { Phone, Mail, MapPin, ExternalLink } from 'lucide-react';
 import { WhatsAppIcon } from '@/components/icons/whatsapp-icon';
 
@@ -19,7 +19,13 @@ export default function Footer() {
         <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-4">
           <div className="flex flex-col items-start gap-4">
             <Link href="/" className="flex items-center gap-2" aria-label="RICE Bharat Home">
-              <RiceLogo className="h-10 w-auto" />
+              <Image 
+                src="https://i.postimg.cc/FKX6pdCw/ricelogo.jpg" 
+                alt="RICE Bharat Logo" 
+                width={120}  // Adjust as per your logo's aspect ratio
+                height={30} // Adjust as per your logo's aspect ratio
+                className="h-10 w-auto" 
+              />
             </Link>
             <p className="text-sm text-muted-foreground">
               Empowering India&apos;s small farmers through technology and innovation.
@@ -54,14 +60,14 @@ export default function Footer() {
                 <Mail className="h-4 w-4 text-primary" />
                 <a href="mailto:rice140624@gmail.com" className="hover:text-primary transition-colors">rice140624@gmail.com</a>
               </li>
-              <li className="flex items-start gap-2"> {/* Changed to items-start for better alignment with multi-line */}
+              <li className="flex items-start gap-2">
                 <MapPin className="h-4 w-4 text-primary mt-0.5 shrink-0" />
                 <div>
-                  <span>Main Office:</span>
-                  <a href="https://maps.app.goo.gl/iQ3ybKUJhkiMB48b7" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors flex items-center">
-                     Locate Us <ExternalLink className="h-3 w-3 ml-1" />
+                  <span className="font-semibold text-foreground">Main Office:</span>
+                  <a href="https://maps.app.goo.gl/iQ3ybKUJhkiMB48b7" target="_blank" rel="noopener noreferrer" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
+                    Palamaner, Chittoor <ExternalLink className="inline-block h-3 w-3 ml-1" />
                   </a>
-                  <span className="block">Andhra Pradesh, India</span>
+                  <span className="block text-sm">Andhra Pradesh, India</span>
                 </div>
               </li>
             </ul>
