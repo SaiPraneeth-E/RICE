@@ -1,14 +1,9 @@
+
 import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Target, Eye, Heart } from 'lucide-react';
+import { Target, Eye, CheckCircle } from 'lucide-react';
 
-const coreValues = [
-  { icon: UsersIcon, name: "Inclusion", description: "Empowering every farmer, irrespective of scale." },
-  { icon: LightbulbIcon, name: "Innovation", description: "Leveraging technology for agricultural advancement." },
-  { icon: ShieldCheckIcon, name: "Integrity", description: "Transparent and ethical practices in all dealings." },
-];
-
-// Custom SVG icons as Lucide doesn't have specific ones
+// Custom SVG icons as Lucide doesn't have specific ones for core values, retaining these.
 function UsersIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
@@ -27,6 +22,19 @@ function ShieldCheckIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
+const coreValues = [
+  { icon: UsersIcon, name: "Inclusion", description: "Empowering every farmer, irrespective of scale." },
+  { icon: LightbulbIcon, name: "Innovation", description: "Leveraging technology for agricultural advancement." },
+  { icon: ShieldCheckIcon, name: "Integrity", description: "Transparent and ethical practices in all dealings." },
+];
+
+const recognitions = [
+  { title: "Finalist – Vikas Startup Accelerator", description: "(Among Top 10 from 300+ Agri & Social Impact startups)" },
+  { title: "Finalist – V Launchpad Innovation Challenge", description: "(Shortlisted for top ideation-stage ventures)" },
+  { title: "Selected – E-Summit 2024, IIT Hyderabad", description: "(Recognized as a promising student-led AgriTech startup)" },
+  { title: "Shortlisted – Wadhwani Foundation Ignite 3.4", description: "(Handpicked for their early-stage venture support program)" },
+  { title: "Top 20 – PW School of Startups 2025 (PhysicsWallah Innovation Centre)", description: "(Selected from many entries nationwide)" },
+];
 
 export default function ImpactVisionSection() {
   return (
@@ -89,22 +97,23 @@ export default function ImpactVisionSection() {
           </div>
         </div>
         
-        <div className="text-center mb-12">
-          <h3 className="text-xl font-semibold text-foreground mb-4">Recognitions &amp; Support</h3>
-          <div className="flex justify-center items-center gap-6 md:gap-10 flex-wrap">
-            {['Vikas', 'V Launchpad', 'PW SoS'].map((event) => (
-              <div key={event} className="flex flex-col items-center">
-                <Image 
-                  src="https://placehold.co/150x80.png" 
-                  alt={`${event} Logo`} 
-                  width={120} 
-                  height={64} 
-                  className="object-contain"
-                  data-ai-hint="logo award"
-                />
-                <p className="text-sm text-muted-foreground mt-1">{event}</p>
-              </div>
-            ))}
+        <div className="mb-12 py-12 bg-muted/30 rounded-lg shadow-inner">
+          <h3 className="text-2xl md:text-3xl font-semibold text-center text-foreground mb-4">🏆 Recognitions &amp; Support</h3>
+          <p className="text-center text-muted-foreground mb-8 max-w-3xl mx-auto px-4">
+            RICE has been recognized by leading startup platforms, educational institutions, and innovation ecosystems across India:
+          </p>
+          <div className="max-w-2xl mx-auto px-4">
+            <ul className="space-y-6">
+              {recognitions.map((recognition, index) => (
+                <li key={index} className="flex items-start gap-3 p-4 bg-background rounded-md shadow-sm border border-border">
+                  <CheckCircle className="h-6 w-6 text-green-500 mt-1 shrink-0" />
+                  <div>
+                    <h4 className="font-semibold text-foreground">{recognition.title}</h4>
+                    <p className="text-sm text-muted-foreground">{recognition.description}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
@@ -126,3 +135,4 @@ export default function ImpactVisionSection() {
     </section>
   );
 }
+
