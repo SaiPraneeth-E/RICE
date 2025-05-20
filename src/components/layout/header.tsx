@@ -2,15 +2,18 @@ import Link from 'next/link';
 import { RiceLogo } from '@/components/icons/rice-logo';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Package2 } from 'lucide-react';
+import { Menu } from 'lucide-react';
 
 export default function Header() {
   const navItems = [
     { href: '#problem-solution', label: 'What is RICE?' },
-    { href: '#how-it-works', label: 'How It Works' },
+    { href: '#interactive-journey', label: 'Farmer Journey' },
     { href: '#products-services', label: 'Services' },
-    { href: '#franchisees', label: 'Partners' },
+    { href: '#marketplace', label: 'Market Insights' },
     { href: '#crop-planner', label: 'Crop Planner' },
+    { href: '#franchise-roi-calculator', label: 'Franchise ROI' },
+    { href: '#farmer-impact-calculator', label: 'Farmer Impact' },
+    { href: '#franchisees', label: 'Partners' },
     { href: '#contact', label: 'Contact' },
   ];
 
@@ -20,7 +23,7 @@ export default function Header() {
         <Link href="/" className="flex items-center gap-2" aria-label="RICE Bharat Home">
           <RiceLogo className="h-8 w-auto" />
         </Link>
-        <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+        <nav className="hidden lg:flex items-center gap-4 text-sm font-medium">
           {navItems.map((item) => (
             <Link
               key={item.label}
@@ -31,7 +34,7 @@ export default function Header() {
             </Link>
           ))}
         </nav>
-        <div className="md:hidden">
+        <div className="lg:hidden">
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon">
@@ -49,7 +52,7 @@ export default function Header() {
                   <Link
                     key={item.label}
                     href={item.href}
-                    className="text-muted-foreground hover:text-foreground"
+                    className="text-muted-foreground hover:text-foreground block py-1" // Added block and py-1 for better tap targets
                   >
                     {item.label}
                   </Link>
