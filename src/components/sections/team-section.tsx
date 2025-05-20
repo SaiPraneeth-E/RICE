@@ -13,9 +13,9 @@ interface TeamMember {
 
 const coreTeamMembers: TeamMember[] = [
   { name: "Premchand Yadav", role: "Founder & CEO", line: "Student founder, rural-rooted, bold vision", avatarUrl: "https://i.postimg.cc/Kztrs6nc/premphoto1-removebg-preview.png", initials: "PY" },
-  { name: "Kiran Kumar Reddy", role: "COO", line: "Ops, finance, agri networks expert", avatarUrl: "https://i.postimg.cc/bw0bQxHW/kiran1-removebg-preview.png", initials: "KR" },
+  { name: "Kiran Kumar Reddy", role: "COO", line: "Ops, finance, agri networks expert", avatarUrl: "https://i.postimg.cc/GmVLm2f2/kiran1.jpg", initials: "KR" },
   { name: "Stephen", role: "Tech Lead", line: "Backend & mobile systems builder", initials: "S" },
-  { name: "SriHarsha Vardhan", role: "UI/UX Lead", line: "Vernacular-first designer", avatarUrl: "https://i.postimg.cc/ncpQnjt1/harsha.jpg", initials: "SV" },
+  { name: "SriHarsha Vardhan", role: "UI/UX Lead", line: "Vernacular-first designer", avatarUrl: "https://i.postimg.cc/8Cp2DVp5/harsha1.jpg", initials: "SV" },
   { name: "Praneeth", role: "Marketing", line: "Rural-urban outreach & GTM expert", avatarUrl: "https://i.postimg.cc/VsqTTTRV/praneeth.jpg", initials: "P" },
 ];
 
