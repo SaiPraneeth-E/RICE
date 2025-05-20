@@ -1,5 +1,2 @@
-# Firebase Studio
+RICE is building a full-stack AgriTech super app + franchise-based rural infrastructure to solve this through digital tools, local entrepreneurship, and embedded financing.
 
-This is a NextJS starter in Firebase Studio.
-
-To get started, take a look at src/app/page.tsx.
