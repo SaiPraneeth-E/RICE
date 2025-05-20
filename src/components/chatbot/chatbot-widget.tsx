@@ -51,18 +51,17 @@ export default function ChatbotWidget() {
     setInputValue('');
     setIsLoading(true);
 
-    // Prepare chat history for the backend
+    // Prepare chat history for the backend.
+    // `messages` state here refers to the history *before* the current `userMessage` is visually added.
+    // The flow `riceAssistantFlow` will append the `userInput` (current userMessage.text) to this history.
     const chatHistoryForAPI: ChatHistoryEntry[] = messages.map(msg => ({
       role: msg.sender === 'user' ? 'user' : 'model',
       parts: [{ text: msg.text }]
     }));
-    // Add the current user message to the history being sent
-    chatHistoryForAPI.push({ role: 'user', parts: [{ text: userMessage.text }] });
-
 
     const actionInput: RiceAssistantActionInput = {
-      userInput: userMessage.text,
-      chatHistory: chatHistoryForAPI,
+      userInput: userMessage.text, // The current message from the user
+      chatHistory: chatHistoryForAPI, // The history of messages *before* the current one
     };
 
     const result = await askRiceAssistant(actionInput);
