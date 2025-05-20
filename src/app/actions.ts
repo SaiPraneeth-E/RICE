@@ -1,9 +1,8 @@
-
 // src/app/actions.ts
 'use server';
 
 import { cropPlanner, type CropPlannerInput, type CropPlannerOutput } from '@/ai/flows/crop-planner';
-import { riceAssistant, type RiceAssistantInput, type RiceAssistantOutput } from '@/ai/flows/rice-assistant-flow';
+// import { riceAssistant, type RiceAssistantInput, type RiceAssistantOutput } from '@/ai/flows/rice-assistant-flow'; // Removed chatbot flow import
 import { z } from 'zod';
 
 // Zod schema for server-side validation of Crop Planner inputs
@@ -112,44 +111,4 @@ export async function calculateFarmerImpactAction(input: FarmerImpactInput): Pro
 }
 
 
-// RICE Assistant Chatbot Action
-const ChatHistoryEntryServerSchema = z.object({
-  role: z.enum(['user', 'model']),
-  parts: z.array(z.object({
-    text: z.string().optional(),
-  }))
-});
-
-const RiceAssistantServerInputSchema = z.object({
-  userInput: z.string().min(1, "Message cannot be empty."),
-  chatHistory: z.array(ChatHistoryEntryServerSchema).optional(),
-});
-export type RiceAssistantActionInput = z.infer<typeof RiceAssistantServerInputSchema>;
-export type ChatHistoryEntry = z.infer<typeof ChatHistoryEntryServerSchema>;
-
-
-interface RiceAssistantActionResult {
-  success: boolean;
-  data?: { botResponse: string };
-  error?: string | z.ZodError<RiceAssistantActionInput>;
-}
-
-export async function askRiceAssistant(input: RiceAssistantActionInput): Promise<RiceAssistantActionResult> {
-  const validationResult = RiceAssistantServerInputSchema.safeParse(input);
-  if (!validationResult.success) {
-    return { success: false, error: validationResult.error };
-  }
-
-  try {
-    // The input here is already conforming to RiceAssistantInput type due to successful Zod parsing
-    const result = await riceAssistant(validationResult.data as RiceAssistantInput);
-    return { success: true, data: result };
-  } catch (error) {
-    console.error("Error in askRiceAssistant:", error);
-    let errorMessage = "An unexpected error occurred while talking to the assistant. Please try again later.";
-    if (error instanceof Error) {
-        errorMessage = error.message;
-    }
-    return { success: false, error: errorMessage };
-  }
-}
+// RICE Assistant Chatbot Action and related types/schemas removed
