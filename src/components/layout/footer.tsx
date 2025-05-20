@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { RiceLogo } from '@/components/icons/rice-logo';
-import { Phone, Mail, MapPin } from 'lucide-react';
+import { Phone, Mail, MapPin, ExternalLink } from 'lucide-react';
 import { WhatsAppIcon } from '@/components/icons/whatsapp-icon';
 
 export default function Footer() {
@@ -44,19 +44,25 @@ export default function Footer() {
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li className="flex items-center gap-2">
                 <Phone className="h-4 w-4 text-primary" />
-                <a href="tel:+910000000000" className="hover:text-primary transition-colors">+91 XXXXX-XXXXX</a>
+                <a href="tel:+919030822369" className="hover:text-primary transition-colors">+91 90308 22369</a>
               </li>
               <li className="flex items-center gap-2">
                 <WhatsAppIcon className="h-4 w-4 text-primary" />
-                <a href="https://wa.me/910000000000" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">WhatsApp Us</a>
+                <a href="https://wa.me/919030822369" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">WhatsApp Us</a>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="h-4 w-4 text-primary" />
-                <a href="mailto:contact@ricebharat.in" className="hover:text-primary transition-colors">contact@ricebharat.in</a>
+                <a href="mailto:rice140624@gmail.com" className="hover:text-primary transition-colors">rice140624@gmail.com</a>
               </li>
-              <li className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-primary" />
-                <span>Andhra Pradesh, India</span>
+              <li className="flex items-start gap-2"> {/* Changed to items-start for better alignment with multi-line */}
+                <MapPin className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                <div>
+                  <span>Main Office:</span>
+                  <a href="https://maps.app.goo.gl/iQ3ybKUJhkiMB48b7" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors flex items-center">
+                     Locate Us <ExternalLink className="h-3 w-3 ml-1" />
+                  </a>
+                  <span className="block">Andhra Pradesh, India</span>
+                </div>
               </li>
             </ul>
           </div>
