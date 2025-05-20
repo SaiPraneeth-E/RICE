@@ -1,7 +1,9 @@
+
 // src/app/actions.ts
 'use server';
 
 import { cropPlanner, type CropPlannerInput, type CropPlannerOutput } from '@/ai/flows/crop-planner';
+import { riceAssistant, type RiceAssistantInput, type RiceAssistantOutput } from '@/ai/flows/rice-assistant-flow';
 import { z } from 'zod';
 
 // Zod schema for server-side validation of Crop Planner inputs
@@ -15,7 +17,7 @@ const CropPlannerServerInputSchema = z.object({
 interface CropPlannerActionResult {
   success: boolean;
   data?: CropPlannerOutput;
-  error?: string | z.ZodError<CropPlannerInput>; // ZodError type might need CropPlannerInput generic
+  error?: string | z.ZodError<CropPlannerInput>;
 }
 
 export async function getCropSuggestions(input: CropPlannerInput): Promise<CropPlannerActionResult> {
@@ -25,7 +27,6 @@ export async function getCropSuggestions(input: CropPlannerInput): Promise<CropP
   }
 
   try {
-    // The input here is already conforming to CropPlannerInput type due to successful Zod parsing
     const result = await cropPlanner(validationResult.data);
     return { success: true, data: result };
   } catch (error) {
@@ -74,7 +75,6 @@ export async function calculateFranchiseRoiAction(input: FranchiseRoiInput): Pro
 const FarmerImpactServerInputSchema = z.object({
   currentAnnualIncome: z.coerce.number().min(1000).max(5000000),
   expectedIncreasePercentage: z.coerce.number().min(1).max(200),
-  // Optional fields from the impact calculator, not used in core logic but good to have in schema if passed
   crop: z.string().optional(),
   landSize: z.coerce.number().optional(),
 });
@@ -92,13 +92,12 @@ interface FarmerImpactActionResult {
 }
 
 export async function calculateFarmerImpactAction(input: FarmerImpactInput): Promise<FarmerImpactActionResult> {
-  // Use a specific schema for validation if FarmerImpactInput includes fields not needed for calculation
   const calculationSchema = z.object({
     currentAnnualIncome: z.coerce.number().min(1000).max(5000000),
     expectedIncreasePercentage: z.coerce.number().min(1).max(200),
   });
   const validationResult = calculationSchema.safeParse(input);
-  
+
   if (!validationResult.success) {
     return { success: false, error: validationResult.error };
   }
@@ -109,5 +108,48 @@ export async function calculateFarmerImpactAction(input: FarmerImpactInput): Pro
   } catch (error) {
     console.error("Error in calculateFarmerImpactAction:", error);
     return { success: false, error: "An unexpected error occurred while calculating impact." };
+  }
+}
+
+
+// RICE Assistant Chatbot Action
+const ChatHistoryEntryServerSchema = z.object({
+  role: z.enum(['user', 'model']),
+  parts: z.array(z.object({
+    text: z.string().optional(),
+  }))
+});
+
+const RiceAssistantServerInputSchema = z.object({
+  userInput: z.string().min(1, "Message cannot be empty."),
+  chatHistory: z.array(ChatHistoryEntryServerSchema).optional(),
+});
+export type RiceAssistantActionInput = z.infer<typeof RiceAssistantServerInputSchema>;
+export type ChatHistoryEntry = z.infer<typeof ChatHistoryEntryServerSchema>;
+
+
+interface RiceAssistantActionResult {
+  success: boolean;
+  data?: { botResponse: string };
+  error?: string | z.ZodError<RiceAssistantActionInput>;
+}
+
+export async function askRiceAssistant(input: RiceAssistantActionInput): Promise<RiceAssistantActionResult> {
+  const validationResult = RiceAssistantServerInputSchema.safeParse(input);
+  if (!validationResult.success) {
+    return { success: false, error: validationResult.error };
+  }
+
+  try {
+    // The input here is already conforming to RiceAssistantInput type due to successful Zod parsing
+    const result = await riceAssistant(validationResult.data as RiceAssistantInput);
+    return { success: true, data: result };
+  } catch (error) {
+    console.error("Error in askRiceAssistant:", error);
+    let errorMessage = "An unexpected error occurred while talking to the assistant. Please try again later.";
+    if (error instanceof Error) {
+        errorMessage = error.message;
+    }
+    return { success: false, error: errorMessage };
   }
 }

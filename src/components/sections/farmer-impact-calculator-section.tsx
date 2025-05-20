@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -8,12 +9,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { TrendingUp, ArrowRightLeft, Loader2, Leaf, DollarSign } from 'lucide-react';
+import { TrendingUp, ArrowRightLeft, Loader2, Leaf, DollarSign as DollarSignIcon } from 'lucide-react'; // Renamed DollarSign to avoid conflict
 import { calculateFarmerImpactAction, type FarmerImpactInput } from '@/app/actions';
 
 const formSchema = z.object({
   currentAnnualIncome: z.coerce.number().min(1000, "Income must be at least ₹1,000.").max(5000000, "Max income ₹5,000,000."),
-  expectedIncreasePercentage: z.coerce.number().min(1, "Expected increase must be at least 1%.").max(200, "Max increase 200%."),
   crop: z.string().min(3, "Crop name must be at least 3 characters.").optional(),
   landSize: z.coerce.number().min(0.1, "Land size must be at least 0.1 acres.").max(100, "Max 100 acres.").optional(),
 });
@@ -25,6 +25,8 @@ interface ImpactResult {
   additionalAnnualIncome: number;
 }
 
+const FIXED_INCREASE_PERCENTAGE = 35; // Average of 30-40%
+
 export default function FarmerImpactCalculatorSection() {
   const [isLoading, setIsLoading] = useState(false);
   const [impactResult, setImpactResult] = useState<ImpactResult | null>(null);
@@ -34,7 +36,6 @@ export default function FarmerImpactCalculatorSection() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       currentAnnualIncome: 50000,
-      expectedIncreasePercentage: 20,
       crop: "Tomatoes",
       landSize: 1,
     },
@@ -47,7 +48,9 @@ export default function FarmerImpactCalculatorSection() {
 
     const actionInput: FarmerImpactInput = {
       currentAnnualIncome: data.currentAnnualIncome,
-      expectedIncreasePercentage: data.expectedIncreasePercentage,
+      expectedIncreasePercentage: FIXED_INCREASE_PERCENTAGE, // Use fixed percentage
+      crop: data.crop,
+      landSize: data.landSize,
     };
 
     const result = await calculateFarmerImpactAction(actionInput);
@@ -72,7 +75,7 @@ export default function FarmerImpactCalculatorSection() {
             What If You Had <span className="text-primary">RICE?</span>
           </h2>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-            See how RICE can potentially increase your farm income. Compare your current earnings with projected earnings.
+            See how RICE can potentially increase your farm income. We estimate a typical income increase of 30-40% for farmers partnering with RICE.
           </p>
         </div>
 
@@ -83,7 +86,7 @@ export default function FarmerImpactCalculatorSection() {
               Calculate Your Income Impact
             </CardTitle>
             <CardDescription>
-              Enter your current farm details and estimated improvement with RICE.
+              Enter your current farm details to see your projected earnings with RICE.
             </CardDescription>
           </CardHeader>
           <Form {...form}>
@@ -120,7 +123,7 @@ export default function FarmerImpactCalculatorSection() {
                   name="currentAnnualIncome"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel htmlFor="currentAnnualIncome" className="text-base flex items-center"><DollarSign className="mr-2 h-4 w-4 text-muted-foreground" />Current Annual Farm Income (INR)</FormLabel>
+                      <FormLabel htmlFor="currentAnnualIncome" className="text-base flex items-center"><DollarSignIcon className="mr-2 h-4 w-4 text-muted-foreground" />Current Annual Farm Income (INR)</FormLabel>
                       <FormControl>
                         <Input id="currentAnnualIncome" type="number" placeholder="e.g., 50000" {...field} className="text-base" />
                       </FormControl>
@@ -128,20 +131,10 @@ export default function FarmerImpactCalculatorSection() {
                     </FormItem>
                   )}
                 />
-                <FormField
-                  control={form.control}
-                  name="expectedIncreasePercentage"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel htmlFor="expectedIncreasePercentage" className="text-base flex items-center"><TrendingUp className="mr-2 h-4 w-4 text-muted-foreground" />Expected Income Increase with RICE (%)</FormLabel>
-                      <FormControl>
-                        <Input id="expectedIncreasePercentage" type="number" placeholder="e.g., 20 for 20%" {...field} className="text-base" />
-                      </FormControl>
-                      <FormDescription>Enter a percentage, e.g., 20 for a 20% increase.</FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                {/* Expected Increase Percentage input field removed */}
+                 <FormDescription className="text-sm text-muted-foreground">
+                    Our platform typically helps farmers increase their income by 30-40%. This calculator uses an average of {FIXED_INCREASE_PERCENTAGE}% for projection.
+                </FormDescription>
               </CardContent>
               <CardFooter className="flex flex-col items-stretch gap-4">
                 <Button type="submit" disabled={isLoading} size="lg" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
@@ -174,7 +167,7 @@ export default function FarmerImpactCalculatorSection() {
                 <p className="text-2xl font-semibold text-muted-foreground/80">₹ {form.getValues("currentAnnualIncome").toLocaleString('en-IN')}</p>
               </div>
               <div className="border-t pt-4">
-                <p className="text-sm text-primary">Projected Annual Income with RICE</p>
+                <p className="text-sm text-primary">Projected Annual Income with RICE (Est. {FIXED_INCREASE_PERCENTAGE}% increase)</p>
                 <p className="text-3xl font-bold text-primary">₹ {impactResult.projectedAnnualIncome.toLocaleString('en-IN')}</p>
               </div>
               <div>
@@ -182,7 +175,7 @@ export default function FarmerImpactCalculatorSection() {
                 <p className="text-2xl font-semibold text-accent">+ ₹ {impactResult.additionalAnnualIncome.toLocaleString('en-IN')}</p>
               </div>
               <p className="text-xs text-muted-foreground text-center pt-2">
-                This is a simplified projection based on your inputs. Actual results can vary due to market conditions, crop choices, and other factors.
+                This is a simplified projection based on your inputs and a typical income increase of 30-40% observed with RICE Bharat services. Actual results can vary due to market conditions, crop choices, and other factors.
               </p>
             </CardContent>
           </Card>
@@ -191,3 +184,4 @@ export default function FarmerImpactCalculatorSection() {
     </section>
   );
 }
+
