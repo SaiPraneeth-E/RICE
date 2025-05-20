@@ -50,12 +50,12 @@ export default function FranchiseesSection() {
           </div>
           <div className="relative h-80 md:h-96 rounded-lg overflow-hidden shadow-xl">
             <Image
-              src="https://placehold.co/600x400.png"
-              alt="Farmer girl harvesting cabbage, representing a RICE Center franchisee opportunity"
+              src="https://images.pexels.com/photos/2933243/pexels-photo-2933243.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+              alt="Farmer using a tablet in a field, representing a RICE Center franchisee opportunity"
               layout="fill"
               objectFit="cover"
               className="transform transition-transform duration-500 hover:scale-105"
-              data-ai-hint="farmer harvesting"
+              data-ai-hint="farmer tablet"
             />
           </div>
         </div>
@@ -63,3 +63,4 @@ export default function FranchiseesSection() {
     </section>
   );
 }
+
