@@ -16,7 +16,7 @@ const teamMembers: TeamMember[] = [
   { name: "Kiran Kumar Reddy", role: "COO", line: "Ops, finance, agri networks expert", avatarUrl: "https://i.ibb.co/WKB9kMv/kiran.jpg", initials: "KR" },
   { name: "Stephen", role: "Tech Lead", line: "Backend & mobile systems builder", initials: "S" },
   { name: "SriHarsha Vardhan", role: "UI/UX Lead", line: "Vernacular-first designer", avatarUrl: "https://i.ibb.co/D52rF1h/harsha.jpg", initials: "SV" },
-  { name: "Praneeth", role: "Marketing", line: "Rural-urban outreach & GTM expert", initials: "P" },
+  { name: "Praneeth", role: "Marketing", line: "Rural-urban outreach & GTM expert", avatarUrl: "https://i.ibb.co/3R2Yk4b/praneeth.jpg", initials: "P" },
   { name: "Karthik Barma", role: "Mentor", line: "Serial founder, innovation advisor", initials: "KB" },
 ];
 
