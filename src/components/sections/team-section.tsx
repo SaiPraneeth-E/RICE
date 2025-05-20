@@ -11,14 +11,15 @@ interface TeamMember {
   initials: string;
 }
 
-const teamMembers: TeamMember[] = [
-  { name: "Premchand Yadav", role: "Founder & CEO", line: "Student founder, rural-rooted, bold vision", initials: "PY" },
-  { name: "Kiran Kumar Reddy", role: "COO", line: "Ops, finance, agri networks expert", avatarUrl: "https://i.ibb.co/WKB9kMv/kiran.jpg", initials: "KR" },
+const coreTeamMembers: TeamMember[] = [
+  { name: "Premchand Yadav", role: "Founder & CEO", line: "Student founder, rural-rooted, bold vision", avatarUrl: "https://i.postimg.cc/Kztrs6nc/premphoto1-removebg-preview.png", initials: "PY" },
+  { name: "Kiran Kumar Reddy", role: "COO", line: "Ops, finance, agri networks expert", avatarUrl: "https://i.postimg.cc/bw0bQxHW/kiran1-removebg-preview.png", initials: "KR" },
   { name: "Stephen", role: "Tech Lead", line: "Backend & mobile systems builder", initials: "S" },
-  { name: "SriHarsha Vardhan", role: "UI/UX Lead", line: "Vernacular-first designer", avatarUrl: "https://i.ibb.co/D52rF1h/harsha.jpg", initials: "SV" },
+  { name: "SriHarsha Vardhan", role: "UI/UX Lead", line: "Vernacular-first designer", avatarUrl: "https://i.postimg.cc/ncpQnjt1/harsha.jpg", initials: "SV" },
   { name: "Praneeth", role: "Marketing", line: "Rural-urban outreach & GTM expert", avatarUrl: "https://i.postimg.cc/VsqTTTRV/praneeth.jpg", initials: "P" },
-  { name: "Karthik Barma", role: "Mentor", line: "Serial founder, innovation advisor", initials: "KB" },
 ];
+
+const mentorMember: TeamMember = { name: "Karthik Barma", role: "Mentor", line: "Serial founder, innovation advisor", initials: "KB" };
 
 export default function TeamSection() {
   return (
@@ -34,7 +35,7 @@ export default function TeamSection() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {teamMembers.map((member) => (
+          {coreTeamMembers.map((member) => (
             <Card key={member.name} className="shadow-lg hover:shadow-xl transition-shadow duration-300">
               <CardHeader className="items-center text-center">
                 <Avatar className="w-24 h-24 mb-4 border-2 border-primary">
@@ -50,8 +51,28 @@ export default function TeamSection() {
             </Card>
           ))}
         </div>
+
+        <div className="mt-16 md:mt-20">
+          <h3 className="text-2xl md:text-3xl font-semibold text-center text-foreground mb-8">
+            Our <span className="text-primary">Mentor</span>
+          </h3>
+          <div className="flex justify-center">
+            <Card key={mentorMember.name} className="shadow-xl hover:shadow-2xl transition-shadow duration-300 max-w-sm border-2 border-accent/50 bg-background">
+              <CardHeader className="items-center text-center">
+                <Avatar className="w-28 h-28 mb-4 border-2 border-accent">
+                  <AvatarImage src={mentorMember.avatarUrl || `https://placehold.co/120x120.png`} alt={mentorMember.name} data-ai-hint="profile person mentor" />
+                  <AvatarFallback className="text-3xl bg-muted text-muted-foreground">{mentorMember.initials}</AvatarFallback>
+                </Avatar>
+                <CardTitle className="text-2xl">{mentorMember.name}</CardTitle>
+                <CardDescription className="text-accent font-semibold text-lg">{mentorMember.role}</CardDescription>
+              </CardHeader>
+              <CardContent className="text-center">
+                <p className="text-base text-muted-foreground">{mentorMember.line}</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
       </div>
     </section>
   );
 }
-
