@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -50,11 +51,11 @@ export default function FranchiseesSection() {
           <div className="relative h-80 md:h-96 rounded-lg overflow-hidden shadow-xl">
             <Image
               src="https://placehold.co/600x400.png"
-              alt="RICE Center with happy franchisee"
+              alt="Farmer girl harvesting cabbage, representing a RICE Center franchisee opportunity"
               layout="fill"
               objectFit="cover"
               className="transform transition-transform duration-500 hover:scale-105"
-              data-ai-hint="rural business entrepreneur"
+              data-ai-hint="farmer harvesting"
             />
           </div>
         </div>
