@@ -1,3 +1,4 @@
+
 import HeroSection from '@/components/sections/hero-section';
 import ProblemSolutionSection from '@/components/sections/problem-solution-section';
 import InteractiveFarmerJourneySection from '@/components/sections/interactive-farmer-journey-section';
@@ -9,6 +10,7 @@ import CropPlannerSection from '@/components/sections/crop-planner-section';
 import MarketplaceDashboardSection from '@/components/sections/marketplace-dashboard-section';
 import FranchiseROICalculatorSection from '@/components/sections/franchise-roi-calculator-section';
 import FarmerImpactCalculatorSection from '@/components/sections/farmer-impact-calculator-section';
+import BlogSection from '@/components/sections/blog-section';
 
 export default function HomePage() {
   return (
@@ -24,6 +26,7 @@ export default function HomePage() {
       <FranchiseesSection />
       <ImpactVisionSection />
       <TeamSection />
+      <BlogSection />
       <div id="waitlist" className="hidden"></div>
       <div id="contact" className="py-12 bg-background">
         <div className="container text-center">

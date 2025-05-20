@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import { RiceLogo } from '@/components/icons/rice-logo';
 import { Button } from '@/components/ui/button';
@@ -13,6 +14,7 @@ export default function Header() {
     { href: '#crop-planner', label: 'Crop Planner' },
     { href: '#franchise-roi-calculator', label: 'Franchise ROI' },
     { href: '#farmer-impact-calculator', label: 'Farmer Impact' },
+    { href: '#blog-insights', label: 'Insights' },
     { href: '#franchisees', label: 'Partners' },
     { href: '#contact', label: 'Contact' },
   ];
@@ -52,7 +54,7 @@ export default function Header() {
                   <Link
                     key={item.label}
                     href={item.href}
-                    className="text-muted-foreground hover:text-foreground block py-1" // Added block and py-1 for better tap targets
+                    className="text-muted-foreground hover:text-foreground block py-1"
                   >
                     {item.label}
                   </Link>
