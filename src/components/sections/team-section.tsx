@@ -19,7 +19,7 @@ const coreTeamMembers: TeamMember[] = [
   { name: "Praneeth", role: "Marketing", line: "Rural-urban outreach & GTM expert", avatarUrl: "https://i.postimg.cc/VsqTTTRV/praneeth.jpg", initials: "P" },
 ];
 
-const mentorMember: TeamMember = { name: "Karthik Barma", role: "Mentor", line: "Serial founder, innovation advisor", initials: "KB" };
+const mentorMember: TeamMember = { name: "Karthik Barma", role: "Mentor", line: "Serial founder, innovation advisor", avatarUrl: "https://i.postimg.cc/C5DV6H7p/karthik.jpg", initials: "KB" };
 
 export default function TeamSection() {
   return (
